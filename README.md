@@ -84,4 +84,18 @@ Untuk mengakses aplikasi sebagai admin, gunakan kredensial berikut:
 
 ### Screenshot Aplikasi
 
-![Login Page](assets/Screenshot 2025-05-06 at 17.46.59.png)
+Login Page
+
+<img src="assets/login.png" alt="Screenshot Aplikasi" width="500"/>
+
+Dashboard Page
+
+<img src="assets/dashboard.png" alt="Screenshot Aplikasi" width="500"/>
+
+Detail Customer
+
+<img src="assets/detail_customer.png" alt="Screenshot Aplikasi" width="500"/>
+
+Logout View Page
+
+<img src="assets/logout.png" alt="Screenshot Aplikasi" width="500"/>
