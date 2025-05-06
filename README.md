@@ -79,3 +79,9 @@ Untuk mengakses aplikasi sebagai admin, gunakan kredensial berikut:
 
 - **Email:** `admin@example.com`
 - **Password:** `admin123`
+
+---
+
+### Screenshot Aplikasi
+
+![Login Page](assets/Screenshot 2025-05-06 at 17.46.59.png)

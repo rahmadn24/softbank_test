@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt" // Untuk enkripsi password
 	"gorm.io/gorm"
 )
 
@@ -74,6 +75,33 @@ func CreateDummyData(db *gorm.DB) {
 			Status:       "active",
 		}
 		db.Create(&term)
+	}
+
+	// Seeder untuk User Admin
+	adminPassword, err := bcrypt.GenerateFromPassword([]byte("admin123"), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatalf("Error hashing password: %v", err)
+	}
+
+	adminUser := models.User{
+		ID:        uuid.New(),
+		Email:     "admin@example.com",
+		Password:  string(adminPassword),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+	}
+
+	// Cek jika admin sudah ada, jika belum, tambahkan
+	var existingUser models.User
+	if err := db.Where("email = ?", adminUser.Email).First(&existingUser).Error; err != nil {
+		// Jika user belum ada, buat user baru
+		if err := db.Create(&adminUser).Error; err != nil {
+			log.Fatalf("Error creating admin user: %v", err)
+		} else {
+			log.Println("✅ Admin user created successfully")
+		}
+	} else {
+		log.Println("⚠️ Admin user already exists")
 	}
 
 	log.Println("✅ Dummy data inserted successfully")

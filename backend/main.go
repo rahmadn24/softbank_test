@@ -2,6 +2,7 @@ package main
 
 import (
 	"customer-dashboard/database"
+	"customer-dashboard/middleware"
 	"customer-dashboard/service"
 	"log"
 	"os"
@@ -50,8 +51,8 @@ func main() {
 	auth.Post("/register", service.Register)
 
 	// Customer (protected routes)
-	customers := api.Group("/customers")
-	// customers := api.Group("/customers", middleware.Protected())
+	// customers := api.Group("/customers")
+	customers := api.Group("/customers", middleware.Protected())
 	customers.Get("/", service.GetCustomers)
 	customers.Get("/:id", service.GetCustomerDetails)
 
