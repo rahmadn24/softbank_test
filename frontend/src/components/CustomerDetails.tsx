@@ -47,9 +47,28 @@ export function CustomerDetails({ customerId }: CustomerDetailsProps) {
     const fetchCustomerDetails = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:8080/api/customers/${customerId}`);
-        const data = await response.json();
-        setCustomerData(data);
+        const token = localStorage.getItem("token"); // Ambil token dari localStorage
+        if (!token) {
+          console.log("No token found, please login.");
+          return;
+        }
+
+        const response = await fetch(
+          `http://localhost:8080/api/customers/${customerId}`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": `Bearer ${token}`, // Kirim token di header Authorization
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setCustomerData(data);
+        } else {
+          console.error("Failed to fetch customer details:", response.statusText);
+        }
       } catch (error) {
         console.error('Error fetching customer details:', error);
       } finally {

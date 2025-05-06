@@ -29,8 +29,20 @@ export function CustomerList({
     const fetchCustomers = async () => {
       setLoading(true);
       try {
+        const token = localStorage.getItem("token"); // Ambil token dari localStorage
+        if (!token) {
+          console.log("No token found, please login.");
+          return;
+        }
+
         const response = await fetch(
-          `http://localhost:8080/api/customers?search=${searchQuery}`
+          `http://localhost:8080/api/customers?search=${searchQuery}`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": `Bearer ${token}`, // Kirim token di header Authorization
+            },
+          }
         );
         const data = await response.json();
         setCustomers(Array.isArray(data) ? data : []);
@@ -78,13 +90,13 @@ export function CustomerList({
           >
             <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
               <span className="text-lg font-semibold">
-                {customer.name}
+                {customer.name ? customer.name.charAt(0) : "?"}
               </span>
             </div>
             <div>
               <h3 className="font-medium">{customer.name}</h3>
               <p className="text-sm text-muted-foreground">
-                {customer.email}
+                {customer.email || "No email available"}
               </p>
             </div>
           </div>
