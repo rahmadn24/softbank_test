@@ -38,6 +38,7 @@ services:
 
   db:
     image: postgres:15
+    container_name: postgre_db
     ports:
       - "5432:5432"
     environment:
