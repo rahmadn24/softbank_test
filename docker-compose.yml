@@ -8,7 +8,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://backend:8080
+      NEXT_PUBLIC_API_URL: http://backend:8080
     depends_on:
       - backend
 
@@ -18,13 +18,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    environment:
-      - DB_HOST=db
-      - DB_PORT=5432
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
-      - DB_NAME=customer_dashboard
-      - JWT_SECRET=your-secret-key
+    env_file:
+      - ./backend/.env  # Menggunakan file .env dari folder backend
     depends_on:
       - db
 
@@ -33,9 +28,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=customer_dashboard
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-customer_dashboard}
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
