@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "esnext", // Menggunakan target ESNext untuk performa lebih baik
+    "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,18 +13,16 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "baseUrl": ".",  // Menambahkan baseUrl agar alias bekerja dengan benar
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
     "paths": {
-      "@/*": ["./src/*"],        // Alias ke folder src (lebih umum)
-      "@/components/*": ["./src/components/*"]
-    },
-    "forceConsistentCasingInFileNames": true // Mencegah error case-sensitive
+      "@/*": ["./*"],
+      "@/components/*": ["./components/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }
