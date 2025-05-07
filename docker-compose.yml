@@ -19,7 +19,20 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - ./backend/.env  # Menggunakan file .env dari folder backend
+      - ./backend/.env
+    command: sh -c "
+      if [ ! -f .env ]; then
+        if [ -f .env.example ]; then
+          cp .env.example .env;
+          echo '.env file created from .env.example';
+        else
+          echo 'No .env or .env.example file found';
+          exit 1;
+        fi;
+      else
+        echo '.env file already exists';
+      fi;
+      ./main"
     depends_on:
       - db
 
