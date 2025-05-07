@@ -60,13 +60,7 @@ Jika Anda ingin menjalankan aplikasi dengan Docker, ikuti langkah-langkah beriku
 1. **Build Docker image**  
    Di folder root proyek, jalankan perintah berikut untuk membuat image Docker:
    ```bash
-   docker build -t superbank-app .
-   ```
-
-2. **Jalankan aplikasi dengan Docker Compose**  
-   Jika menggunakan Docker Compose, Anda bisa menjalankan perintah berikut:
-   ```bash
-   docker-compose up
+   docker-compose up --build
    ```
 
 Aplikasi frontend dan backend akan berjalan di container Docker. Pastikan untuk memeriksa file `docker-compose.yml` dan konfigurasi lainnya jika diperlukan.
