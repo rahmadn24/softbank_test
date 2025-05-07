@@ -42,9 +42,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
-      POSTGRES_DB: ${DB_NAME:-customer_dashboard}
+      POSTGRES_USER: ryahmadn
+      POSTGRES_PASSWORD: ryahmadn
+      POSTGRES_DB: softbank_test
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
