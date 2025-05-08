@@ -32,6 +32,12 @@ services:
       else
         echo '.env file already exists';
       fi;
+
+      echo 'Waiting for PostgreSQL...';
+      until nc -z db 5432; do
+        sleep 1;
+      done;
+
       ./main"
     depends_on:
       - db
